@@ -5,7 +5,7 @@ set_include_path('/usr/local/PEAR' . PATH_SEPARATOR . get_include_path());
 include_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 include_once 'PHPUnit/Extensions/SeleniumTestCase/SauceOnDemandTestCase.php';
 
-class CPHSE_Framework_SauceLabs extends PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase {
+class Framework_SauceLabs extends PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase {
 
     var $timeout = 30000;
     var $os = null;
@@ -31,6 +31,8 @@ class CPHSE_Framework_SauceLabs extends PHPUnit_Extensions_SeleniumTestCase_Sauc
             }
         }
 
+        $this->type != 'saucelabs' ? trigger_error('in conf file type is set to "'.$this->type.'" but this test requires it to be "saucelabs"') : '';
+        
         $this->browser == '' ? trigger_error('$this->browser is not set! use: browser=<your browser>') : '';
         $this->url == '' ? trigger_error('$this->url is not set! use: url=http://www.my-application.com') : '';
         $this->browser_version == '' ? trigger_error('$this->browser_version is not set! use: browser_version=3.0.') : '';
@@ -72,7 +74,7 @@ class CPHSE_Framework_SauceLabs extends PHPUnit_Extensions_SeleniumTestCase_Sauc
 
 }
 
-class CPHSE_Framework extends PHPUnit_Extensions_SeleniumTestCase {
+class Framework extends PHPUnit_Extensions_SeleniumTestCase {
 
     var $selenium_host = 'localhost';
     var $selenium_port = 4444;
@@ -95,6 +97,8 @@ class CPHSE_Framework extends PHPUnit_Extensions_SeleniumTestCase {
                 $this->$pair[0] = $pair[1];
             }
         }
+
+        $this->type != 'localhost' ? trigger_error('in conf file type is set to "'.$this->type.'" but this test requires it to be "localhost"') : '';
 
         $this->browser == '' ? trigger_error('$this->browser is not set! use: browser=<your browser>') : '';
         $this->url == '' ? trigger_error('$this->url is not set! use: url=http://www.my-application.com') : '';

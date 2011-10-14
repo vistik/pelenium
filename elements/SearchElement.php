@@ -1,19 +1,25 @@
 <?php
 
-require_once 'core/CPHSE_CommonElementFunctions.php';
-require_once 'core/CPHSE_Exception.php';
+require_once 'core/CommonElementFunctions.php';
+require_once 'core/Exception.php';
 
-class SearchElement extends CPHSE_CommonElementFunctions {
+class SearchElement extends CommonElementFunctions {
 
     function __construct($selenium, $path = '') {
         parent::constructor($selenium, $path);
     }
 
-    function somefunction($foo, $bar) {
-        $this->selenium->type("name=email", $foo);
-        $this->selenium->type("name=password", $bar);
-        $this->selenium->click("some locator");
-        $this->selenium->waitForPageToLoad("30000");
+    function search($string) {
+        $this->selenium->type("id=lst-ib", $string);
+        $this->selenium->click("name=btnG");
+        if(!$this->waitForTitleContains($string)){
+            throw new PeleniumException("Timeout waiting for title to contain $string");
+        }
+    }
+
+    function verifyResult($index, $expected){
+        $result = $this->selenium->getText("//ol[@id='rso']/li[$index]/div/h3/a");
+        $this->selenium->assertEquals($expected, $result);
     }
 
 

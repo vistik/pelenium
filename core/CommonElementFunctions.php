@@ -4,7 +4,7 @@
  * Common class for shared functions
  * @author Visti Kløft
  */
-class CPHSE_CommonElementFunctions {
+class CommonElementFunctions {
 
     /**
      * @author Visti Kløft
@@ -14,6 +14,7 @@ class CPHSE_CommonElementFunctions {
         $this->selenium = $selenium;
         if ($path != '') {
             $this->selenium->open($path);
+            $this->selenium->waitForPageToLoad("30000");
         }
 //        $this->selenium->windowMaximize();
     }
@@ -43,6 +44,20 @@ class CPHSE_CommonElementFunctions {
 
     function waitForElementPresent($element) {
         return $this->waitFor('$this->selenium->isElementPresent("' . $element . '") == true');
+    }
+
+    function waitForTitle($title){
+        $title = strtolower($title);
+        return $this->waitFor('strtolower($this->selenium->getTitle()) == "'.$title.'"');
+    }
+
+    function waitForTitleContains($title){
+        $title = strtolower($title);
+        return $this->waitFor('strpos(strtolower($this->selenium->getTitle()),"'.$title.'") !== false');
+    }
+
+    function waitForTextPresent($text){
+        return $this->waitFor('$this->selenium->isTextPresent("' . $text .'")');
     }
 
     /**

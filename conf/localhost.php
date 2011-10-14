@@ -11,7 +11,7 @@ $url = 'http://google.com';
 $testPath = 'tests/';
 
 // testcase filter
-$testFilter = 'localhost*';
+$testFilter = '*';
 
 // where to find the test results
 $resultPath = 'results/';
@@ -23,11 +23,14 @@ $deleteReportsBeforeTestRun = true;
 $type = 'localhost';
 
 //debug mode
-$debug = 0;
+$debug = 1;
 
 //selenium host
 $selenium_host = 'localhost';
 
 //selenium host
 $selenium_port = 4444;
+
+// delay (in sec) between starting tests (useful when running locally so test don't timeout)
+$delay = 0;
 ?>

@@ -1,10 +1,10 @@
 <?php
 /**
- * Description of CPHSE_Exception
+ * Description of Exception
  *
  * @author visti
  */
-class CPHSE_Exception extends Exception{
+class PeleniumException extends Exception{
 
 }
 ?>

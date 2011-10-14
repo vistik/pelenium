@@ -91,6 +91,12 @@ if ($type == 'localhost') {
         echo 'selenium_port is set to default: 4444' . "\n";
         $selenium_port = 4444;
     }
+
+    if (!isset($delay)) {
+        echo 'delay is not set in the conf-file. do it by: writing: $delay=20 in your conf-file:' . $conffile . "\n";
+        echo 'delay is set to default: 0' . "\n";
+        $selenium_port = 4444;
+    }
 }
 
 if ($deleteReportsBeforeTestRun) {
@@ -111,6 +117,11 @@ foreach (glob($testPath . $testFilter) as $filename) {
     $tests[] = str_replace($testPath, '', $filename);
 }
 
+if (count($tests) == 0) {
+    trigger_error("No tests matches the filter, Fix that!");
+    exit;
+}
+
 // Saucelabs runner
 if ($type == 'saucelabs') {
     foreach ($tests as $test) {
@@ -121,7 +132,7 @@ if ($type == 'saucelabs') {
                         $time = microtime(true);
                         $nice_os = str_replace(' ', '-', $os);
                         debug("queued: $test @$os/$b($version)", true);
-                        $cmd = "phpunit --log-junit $resultPath" . "testresults-$test-$b-$version-$nice_os-$time.xml " . $testPath . $test . " url=$url browser=$b browser_version=$version os='$os' $extra_args conf=$conffile > /dev/null & \n";
+                        $cmd = "phpunit --log-junit $resultPath" . "testresults-$test-$b-$version-$nice_os-$time.xml " . $testPath . $test . " url=$url browser=$b browser_version=$version os='$os' $extra_args conf=$conffile type=$type> /dev/null & \n";
                         $queue[] = $cmd;
                         exec($cmd); //
                         debug("Running: $cmd");
@@ -152,12 +163,12 @@ if ($type == 'saucelabs') {
         foreach ($combinations as $b) {
             $time = microtime(true);
             debug("started: $test @$b", true);
-            $cmd = "phpunit --log-junit $resultPath" . "testresults-$test-$b-$time.xml " . $testPath . $test . " url=$url browser=$b conf=$conffile selenium_host=$selenium_host selenium_port=$selenium_port> /dev/null &";
+            $cmd = "phpunit --log-junit $resultPath" . "testresults-$test-$b-$time.xml " . $testPath . $test . " url=$url browser=$b conf=$conffile selenium_host=$selenium_host selenium_port=$selenium_port $extra_args type=$type > /dev/null &";
             exec($cmd); //
             debug("Running: $cmd");
-            sleep(20);
+            sleep($delay);
         }
     }
-    debug("Done queueing tests", true);
+    debug("Done queueing tests\n", true);
 }
 ?>
