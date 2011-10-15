@@ -28,7 +28,7 @@ $debug = 1;
 //selenium host
 $selenium_host = 'localhost';
 
-//selenium host
+//selenium port
 $selenium_port = 4444;
 
 // delay (in sec) between starting tests (useful when running locally so test don't timeout)
