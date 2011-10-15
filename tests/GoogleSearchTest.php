@@ -1,28 +1,30 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-require_once 'core/Framework.php';
+require_once 'core/Pelenium_Framework.php';
 
-class GoogleSearchTest extends Framework{
+class GoogleSearchTest extends Pelenium_Framework{
 
     public function setUp() {
         parent::setup();
     }
 
-    public function testSearchForHelloWorld() {
-        $se = new SearchElement($this, '/');
-        $se->search('hello world');
-        $se->verifyResult(1, 'Hello world program - Wikipedia, the free encyclopedia');
+    function searchData() {
+        return array(
+            array('hello world','Hello world program - Wikipedia, the free encyclopedia'),
+            array('SauceLabs','Cross browser testing with Selenium - Sauce Labs')
+        );
     }
 
-    public function testSearchForSauceLabs() {
+    /**
+     *
+     * @param <type> $searchfor
+     * @param <type> $expectedResult
+     * @dataProvider searchData
+     */
+    public function testSearchFor($searchfor, $expectedResult) {
         $se = new SearchElement($this, '/');
-        $se->search('SauceLabs');
-        $se->verifyResult(1, 'Cross browser testing with Selenium - Sauce Labs');
-        $se->verifyResult(2, 'Sauce Labs (saucelabs) on Twitter');
+        $se->search($searchfor);
+        $se->verifyResult(1, $expectedResult);
     }
 }
 

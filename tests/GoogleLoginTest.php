@@ -1,12 +1,7 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once 'core/Pelenium_Framework.php';
 
-require_once 'core/Framework.php';
-
-class GoogleLoginTest extends Framework {
+class GoogleLoginTest extends Pelenium_Framework {
 
     public function setUp() {
         parent::setup();
@@ -28,6 +23,20 @@ class GoogleLoginTest extends Framework {
     public function testFakeLogin($username, $password) {
         $tb = new TopbarElement($this, '/');
         $tb->gotoLogin();
+        $login = new LoginElement($this);
+        $login->login($username, $password);
+        $tb->verifyFailedLogin();
+    }
+
+    /**
+     * This test will fail because image search does not have the login screen
+     * @param <type> $username
+     * @param <type> $password
+     * @dataProvider fakeUsernames
+     */
+    public function testThisWillFail($username, $password) {
+        $tb = new TopbarElement($this, '/');
+        $tb->gotoImageSearch();
         $login = new LoginElement($this);
         $login->login($username, $password);
         $tb->verifyFailedLogin();
