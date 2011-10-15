@@ -1,5 +1,9 @@
 #Selenium framework for PHP (called Pelenium)
 
+## Current version
+
+See VERSION.txt
+
 ## Structure of Pelenium
 
 This is a simple framework for selenium. It contains following:
