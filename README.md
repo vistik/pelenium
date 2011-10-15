@@ -9,21 +9,26 @@ See VERSION.txt
 This is a simple framework for selenium. It contains following:
 
 conf/
+
     configuration files - you can add your own or use the defaults
 
 core/
+
     contains the 'core' of the framework
     Pelenium_CommonElementFunctions.php - shared functions for all the elements
     Pelenium_Framework.php - the framework file that contains both Pelenium_Framework and Pelenium_Framework_SauceLabs class. Used for localhost and saucelabs
     Pelenium_Exception.php - Exception used in the framework
 
 elements/
+
     should contain your elements
 
 results/
+
     the test results
 
 tests/
+
     your tests
 
 ## Requirements
