@@ -16,7 +16,7 @@ $url = 'http://google.com';
 $testPath = 'tests/';
 
 // testcase filter
-$testFilter = 'Inbox*';
+$testFilter = 'SauceLab*';
 
 // where to find the test results
 $resultPath = 'results/';

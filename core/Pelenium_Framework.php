@@ -30,7 +30,7 @@ class Pelenium_Framework_SauceLabs extends PHPUnit_Extensions_SeleniumTestCase_S
                 $this->$pair[0] = $pair[1];
             }
         }
-
+        echo "sdfsddfsffds";
         $this->type != 'saucelabs' ? trigger_error('in conf file type is set to "'.$this->type.'" but this test requires it to be "saucelabs"') : '';
         
         $this->browser == '' ? trigger_error('$this->browser is not set! use: browser=<your browser>') : '';

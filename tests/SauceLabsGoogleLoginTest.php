@@ -1,7 +1,7 @@
 <?php
 require_once 'core/Pelenium_Framework.php';
 
-class GoogleLoginTest extends Pelenium_Framework {
+class GoogleLoginTest extends Pelenium_Framework_SauceLabs {
 
     function fakeUsernames() {
         return array(
@@ -22,6 +22,7 @@ class GoogleLoginTest extends Pelenium_Framework {
         $login = new LoginElement($this);
         $login->login($username, $password);
         $tb->verifyFailedLogin();
+//        $this->tagTest();
     }
 
     /**
@@ -36,6 +37,7 @@ class GoogleLoginTest extends Pelenium_Framework {
         $login = new LoginElement($this);
         $login->login($username, $password);
         $tb->verifyFailedLogin();
+//        $this->tagTest('fail');
     }
 
 }
